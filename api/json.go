@@ -17,7 +17,7 @@ type Response struct {
 	Error string
 }
 
-func Handler(w http.ResponseWriter, r http.Request) {
+func Handler(w http.ResponseWriter, r *http.Request) {
 	var response Response
 
 	if r.Method != "GET" {
@@ -49,4 +49,28 @@ func Handler(w http.ResponseWriter, r http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(200)
 	json.NewEncoder(w).Encode(response)
+
+	// Optional JSON Syntax
+
+	// jsonResp, err := json.Marshal(response)
+
+	// if err != nil {
+	// 	w.Header().Set("Content-Type", "application/json")
+	// 	w.WriteHeader(400)
+
+	// 	errorRes := make(map[string]string)
+
+	// 	errorRes["sucess"] = "false"
+	// 	errorRes["error"] = "Encoding Problem"
+
+	// 	jsonErrorResp, _ := json.Marshal(errorRes)
+
+	// 	w.Write(jsonErrorResp)
+
+	// 	return
+	// }
+
+	// w.Header().Set("Content-Type", "application/json")
+	// w.WriteHeader(200)
+	// w.Write(jsonResp)
 }
